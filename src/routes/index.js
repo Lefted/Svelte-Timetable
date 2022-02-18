@@ -1,15 +1,15 @@
 import dbConnect from '$lib/database';
-import { ActivityModel } from '../../models/activity';
+import { ActivityModel } from '$models/activity';
 
 export async function get() {
 	try {
 		await dbConnect();
 		const activities = await ActivityModel.find({}).exec();
-
 		return {
 			body: { activities }
 		};
 	} catch (error) {
+		console.log(error);
 		return {
 			status: 500,
 			body: {
@@ -31,6 +31,7 @@ export const post = async ({ request }) => {
 			body: { status: 'Success' }
 		};
 	} catch (error) {
+		console.log(error);
 		return {
 			status: 400,
 			body: {
